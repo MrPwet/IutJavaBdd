@@ -13,5 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/usr/share/java/mariadb-jdbc/mariadb-java-client-1.1.5.jar"/>
+	<classpathentry kind="lib" path="/usr/share/java/commons-dbcp/commons-dbcp.jar"/>
+	<classpathentry kind="lib" path="/usr/share/java/commons-pool/commons-pool.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
