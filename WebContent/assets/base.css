@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body {
+	width:780px;
+	margin:auto;
+	text-align:center;
+}
+
+h1 {
+	text-align:center;
+}
+
+table {
+	margin:auto;
+}
+
+form {
+	position:relative;
+	left:-5.5em;
+}
+
+
