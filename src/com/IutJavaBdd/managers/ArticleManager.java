@@ -97,6 +97,32 @@ public class ArticleManager {
 		return lst;
 	}
 	
+	public List<Article> readAll(String critere) {
+		PreparedStatement pstm = null;
+		String sql = "select idArticle, nomArticle, prixArticle, disponibiliteArticle, categorieArticle from Article order by " + critere +";";
+		List<Article> lst = new ArrayList<Article>();
+		ResultSet rset = null;
+		
+		try {
+			pstm = conn.prepareStatement(sql);
+			rset = pstm.executeQuery();
+			while(rset.next()) {
+				Article article = new Article();
+				article.setIdArticle(rset.getInt(1));
+				article.setNomArticle(rset.getString(2));
+				article.setPrixArticle(rset.getBigDecimal(3));
+				article.setDisponibiliteArticle(rset.getInt(4));
+				article.setCategorieArticle(rset.getString(5));
+				lst.add(article);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { rset.close(); } catch (Exception ignore) {}
+			try { pstm.close(); } catch (Exception ignore) {}
+		}
+		return lst;
+	}
 
 	public int update(Article article) {
 		PreparedStatement pstm = null;

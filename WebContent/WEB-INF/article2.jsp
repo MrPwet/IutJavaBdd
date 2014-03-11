@@ -2,15 +2,23 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/header.jsp" %>
-	<h1>${essai }</h1>
+	<c:url var="nom" value="/Article2">
+		<c:param name="critere" value="nomArticle"></c:param>
+	</c:url>
+	<c:url var="prix" value="/Article2">
+		<c:param name="critere" value="prixArticle"></c:param>
+	</c:url>
+	<c:url var="categorie" value="/Article2">
+		<c:param name="critere" value="categorieArticle"></c:param>
+	</c:url>
 	<table class="pure-table pure-table-horizontal">
 		<caption>Liste des articles en vente</caption>
 		<thead>
 			<tr>
-				<td>Nom</td>
-				<td>Prix</td>
+				<td><a href="${nom }">Nom</a></td>
+				<td><a href="${prix }">Prix</a></td>
 				<td>Disponibilité</td>
-				<td>Catégorie</td>
+				<td><a href="${categorie }">Catégorie</a></td>
 				<td>Action</td>
 			</tr>
 		</thead>
