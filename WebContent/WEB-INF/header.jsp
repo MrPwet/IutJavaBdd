@@ -11,9 +11,19 @@
 </head>
 <body>
 
+<c:url var="articleUrl" value="/Article"></c:url>
+<c:url var="article2Url" value="/Article2"></c:url>
+<c:url var="panierUrl" value="/Panier"></c:url>
+
 <header>
 	<h1>Java Iut BDD</h1>
 	<nav>
-		
+		<div class="pure-menu pure-menu-open pure-menu-horizontal">
+			<ul>
+				<li><a href="${articleUrl }">Article</a></li>
+				<li><a href="${article2Url }">Article2</a></li>
+				<li><a href="${panierUrl }">Panier</a></li>
+			</ul>
+		</div>
 	</nav>
 </header>

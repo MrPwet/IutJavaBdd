@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.IutJavaBdd.beans.Article;
 import com.IutJavaBdd.managers.ArticleManager;
+import com.IutJavaBdd.managers.PanierManager;
 import com.IutJavaBdd.tools.Singleton;
 
 /**
@@ -37,9 +38,13 @@ public class Article2Servlet extends HttpServlet {
 		
 		Connection conn = null;
 		ArticleManager am = null;
+		PanierManager pm = null;
 		List<Article> lst = null;
 		
 		//Gestion des paramètres
+		String idParam = request.getParameter("id");
+		String qteParam = request.getParameter("qte");
+		String usernameParam = "user1";
 		
 		try {
 			conn = Singleton.DS.getConnection();
@@ -49,6 +54,24 @@ public class Article2Servlet extends HttpServlet {
 		}
 		
 		am = new ArticleManager(conn);
+		pm = new PanierManager(conn);
+		
+		if(idParam != null && qteParam != null) {
+			int id = Integer.valueOf(idParam);
+			int qte = Integer.valueOf(qteParam);
+			int qteInitial = pm.getQte(usernameParam, id);
+			if(qteInitial > 0) {
+				if(pm.updateUsersArticle(usernameParam, id, qte + qteInitial) == 1) {
+					try { conn.commit(); } catch (Exception e) { e.printStackTrace(); }
+				}
+			}
+			else {
+				if(pm.addArticleToUser(usernameParam, id, qte) == 1) {
+					try { conn.commit(); } catch (Exception e) { e.printStackTrace(); }
+				}
+			}
+		}
+		
 		lst = am.readAll();
 		
 		try { conn.close(); } catch (Exception ignore) {}

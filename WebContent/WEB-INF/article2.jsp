@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/header.jsp" %>
 	<table class="pure-table pure-table-horizontal">
-		<caption>Liste des articles en ventes</caption>
+		<caption>Liste des articles en vente</caption>
 		<thead>
 			<tr>
 				<td>Nom</td>
@@ -23,7 +23,7 @@
 					<td>
 						<form method="GET" action="/IutJavaBdd/Article2">
 							<input type="hidden" name="id" value="${article.idArticle }"/>
-							<input type="number" name="qte" min="0" max="${article.disponibiliteArticle}"/>
+							<input type="number" name="qte" placeholder="qte" min="0" max="${article.disponibiliteArticle}"/>
 							<input type="submit" value="Ajouter au panier"/>
 						</form>
 					</td>

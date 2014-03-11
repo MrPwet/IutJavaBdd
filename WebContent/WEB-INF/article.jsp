@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/header.jsp" %>
 	<p><c:out value="${info}"></c:out></p>
 	<table class="pure-table pure-table-horizontal">
-		<caption>Liste des articles en ventes</caption>
+		<caption>Liste des articles en vente</caption>
 		<thead>
 			<tr>
 				<td>Nom</td>
