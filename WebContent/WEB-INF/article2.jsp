@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/header.jsp" %>
+	<h1>${essai }</h1>
 	<table class="pure-table pure-table-horizontal">
 		<caption>Liste des articles en vente</caption>
 		<thead>
