@@ -44,8 +44,13 @@ public class Article2Servlet extends HttpServlet {
 		//Gestion des paramètres
 		String idParam = request.getParameter("id");
 		String qteParam = request.getParameter("qte");
-		String usernameParam = "user1";
 		String critere = request.getParameter("critere");
+		
+		//Récupération de l'username si l'utilisateur est logué
+		String usernameParam = (String)request.getSession().getAttribute("userSigned");
+		if(usernameParam == null) {
+			usernameParam = "defaut";
+		}
 		
 		try {
 			conn = Singleton.DS.getConnection();

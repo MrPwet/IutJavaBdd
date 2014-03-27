@@ -2,11 +2,11 @@ package com.IutJavaBdd.servlets;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +18,7 @@ import com.IutJavaBdd.beans.Article;
 import com.IutJavaBdd.beans.Panier;
 import com.IutJavaBdd.managers.ArticleManager;
 import com.IutJavaBdd.managers.PanierManager;
+import com.IutJavaBdd.tools.FlorantPanier;
 import com.IutJavaBdd.tools.Singleton;
 
 /**
@@ -45,8 +46,9 @@ public class PanierServlet extends HttpServlet {
 		PanierManager pm = null;
 		List<Panier> lst = null;
 		Iterator<Panier> it = null;
-		Map<Article, Integer> lstArticle = null;
-		BigDecimal total = null;
+		List<FlorantPanier> lstArticle = null;
+		BigDecimal totalHTC = null;
+		BigDecimal totalTTC = null;
 		String usernameParam = request.getParameter("user");
 		String idArticleParam = request.getParameter("id");
 		
@@ -66,22 +68,38 @@ public class PanierServlet extends HttpServlet {
 			}
 		}
 		
+		//On récupère le pseudo de l'utilisateur s'il est connecté
+		String username = (String)request.getSession().getAttribute("userSigned");
+		if(username == null) {
+			username = "defaut";
+		}
+		
 		//Réception des id articles présent dans le panier ansi que de la quantité
-		lst = pm.readAll();
+		lst = pm.readAll(username);
 		
 		//Récupération de toutes les infos sur les articles
-		lstArticle = new HashMap<Article, Integer>();
+		lstArticle = new ArrayList<FlorantPanier>();
+		totalHTC = new BigDecimal(0);
+		totalTTC = new BigDecimal(0);
 		it = lst.iterator();
 		while(it.hasNext()) {
 			Panier current = (Panier)it.next();
-			lstArticle.put(am.read(current.getIdArticle()), current.getQte());
+			Article currentArticle = am.read(current.getIdArticle());
+			int quantiteArticle = current.getQte();
+			FlorantPanier fp = new FlorantPanier(currentArticle, quantiteArticle);
+			totalHTC = totalHTC.add(fp.getPrixTotal());
+			lstArticle.add(fp);
 		}
+		
+		totalTTC = totalHTC.multiply(new BigDecimal(1.20));
+		totalTTC = totalTTC.setScale(2, RoundingMode.CEILING);
 		
 		try { conn.close(); } catch (Exception ignore) {}
 		
 		request.setAttribute("title", "Panier");
 		request.setAttribute("lstArticle", lstArticle);
-		request.setAttribute("total", total);
+		request.setAttribute("totalHTC", totalHTC);
+		request.setAttribute("totalTTC", totalTTC);
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}

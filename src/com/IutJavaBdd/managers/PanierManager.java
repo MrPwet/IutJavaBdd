@@ -3,7 +3,6 @@ package com.IutJavaBdd.managers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,15 +36,16 @@ public class PanierManager {
 		return n;
 	}
 	
-	public List<Panier> readAll() {
-		Statement stm = null;
-		String sql = "select username, idArticle, qte from Contient;";
+	public List<Panier> readAll(String username) {
+		PreparedStatement pstm = null;
+		String sql = "select username, idArticle, qte from Contient where username=?;";
 		List<Panier> lst = new ArrayList<Panier>();
 		ResultSet rset = null;
 		
 		try {
-			stm = conn.createStatement();
-			rset = stm.executeQuery(sql);
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, username);
+			rset = pstm.executeQuery();
 			while(rset.next()) {
 				Panier panier = new Panier();
 				panier.setUsername(rset.getString(1));
@@ -57,7 +57,7 @@ public class PanierManager {
 			e.printStackTrace();
 		} finally {
 			try { rset.close(); } catch (Exception ignore) {}
-			try { stm.close(); } catch (Exception ignore) {}
+			try { pstm.close(); } catch (Exception ignore) {}
 		}
 		
 		return lst;

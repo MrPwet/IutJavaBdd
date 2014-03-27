@@ -26,7 +26,7 @@
 			<c:forEach var="article" items="${lst}">
 				<tr>
 					<td><c:out value="${article.nomArticle }"></c:out></td>
-					<td><c:out value="${article.prixArticle }"></c:out></td>
+					<td><c:out value="${article.prixArticle }"></c:out>€</td>
 					<td><c:out value="${article.disponibiliteArticle }"></c:out></td>
 					<td><c:out value="${article.categorieArticle }"></c:out></td>
 					<td>
