@@ -3,7 +3,9 @@
 
 <%@ include file="/WEB-INF/header.jsp" %>
 
-<form action="" method="post" class="pure-form pure-form-aligned">
+<p>${messageInfo }</p>
+
+<form action="/IutJavaBdd/Config" method="post" class="pure-form pure-form-aligned">
 	<fieldset>
 		<div class="pure-control-group">
 			<label for="url">URL</label>

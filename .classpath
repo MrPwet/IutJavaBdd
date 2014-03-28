@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="/usr/share/java/commons-pool/commons-pool.jar"/>
 	<classpathentry kind="lib" path="/usr/share/java/mariadb-jdbc/mariadb-java-client.jar"/>
 	<classpathentry kind="lib" path="/usr/share/java/mariadb-jdbc/mariadb-java-client-1.1.6.jar"/>
+	<classpathentry kind="lib" path="/home/mrpwet/Téléchargements/mysql-connector-java-5.1.29/mysql-connector-java-5.1.29-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

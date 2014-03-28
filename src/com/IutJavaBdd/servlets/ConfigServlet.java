@@ -1,11 +1,15 @@
 package com.IutJavaBdd.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.IutJavaBdd.tools.Singleton;
+import com.IutJavaBdd.tools.TableCreator;
 
 /**
  * Servlet implementation class ConfigServlet
@@ -37,6 +41,22 @@ public class ConfigServlet extends HttpServlet {
 		String urlJdbc = request.getParameter("url");
 		String userConf = request.getParameter("userConf");
 		String passConf = request.getParameter("passConf");
+		String messageInfo = null;
+		
+		if("".equals(urlJdbc) || "".equals(userConf)) {
+			messageInfo = "La configuration à échoué !";
+		}
+		else {
+			messageInfo = "Succès de la configuration !";
+			Singleton.init(urlJdbc, userConf, passConf);
+			TableCreator.dropAllTheTable();
+			TableCreator.createTable();
+			TableCreator.populateTable();
+		}
+		
+		request.setAttribute("title", "Config");
+		request.setAttribute("messageInfo", messageInfo);
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 }
