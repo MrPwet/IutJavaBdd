@@ -32,7 +32,7 @@
 					<td>
 						<form method="GET" action="/IutJavaBdd/Article2">
 							<input type="hidden" name="id" value="${article.idArticle }"/>
-							<input type="number" name="qte" placeholder="qte" min="0" max="${article.disponibiliteArticle}"/>
+							<input type="number" name="qte" placeholder="qte" value="1" min="1" max="${article.disponibiliteArticle}"/>
 							<input type="submit" value="Ajouter au panier"/>
 						</form>
 					</td>

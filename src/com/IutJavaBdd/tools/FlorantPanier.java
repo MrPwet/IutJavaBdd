@@ -11,6 +11,12 @@ public class FlorantPanier {
 	private BigDecimal prixTotal;
 	private BigDecimal prixTotalTTC;
 	
+	public FlorantPanier(Article article, int quantite, BigDecimal prixTotal, BigDecimal prixTotalTTC) {
+		this.article = article;
+		this.quantite = quantite;
+		this.prixTotal = prixTotal;
+		this.prixTotalTTC = prixTotalTTC;
+	}
 	public FlorantPanier(Article article, int quantite) {
 		this.article = article;
 		this.quantite = quantite;

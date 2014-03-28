@@ -14,6 +14,7 @@
 <c:url var="articleUrl" value="/Article"></c:url>
 <c:url var="article2Url" value="/Article2"></c:url>
 <c:url var="panierUrl" value="/Panier"></c:url>
+<c:url var="commandeUrl" value="/Commande"></c:url>
 <c:url var="connectionUrl" value="/Connection"></c:url>
 <c:url var="deconnectionUrl" value="/Connection">
 	<c:param name="dc" value="true"></c:param>
@@ -27,6 +28,7 @@
 				<li><a href="${articleUrl }">Article</a></li>
 				<li><a href="${article2Url }">Article2</a></li>
 				<li><a href="${panierUrl }">Panier</a></li>
+				<li><a href="${commandeUrl }">Commandes</a></li>
 				<li><a href="${connectionUrl }">Connection</a></li>
 				<li><a href="${deconnectionUrl }">Déconnection</a></li>
 			</ul>

@@ -40,8 +40,6 @@ public class ConnectionServlet extends HttpServlet {
 			request.getSession().removeAttribute("userSigned");
 		}
 		
-		System.out.println(request.getSession().getAttribute("userSigned"));
-		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 

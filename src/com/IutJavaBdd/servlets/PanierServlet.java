@@ -49,8 +49,12 @@ public class PanierServlet extends HttpServlet {
 		List<FlorantPanier> lstArticle = null;
 		BigDecimal totalHTC = null;
 		BigDecimal totalTTC = null;
-		String usernameParam = request.getParameter("user");
+		String usernameParam = (String)request.getSession().getAttribute("userSigned");
 		String idArticleParam = request.getParameter("id");
+		
+		if(usernameParam == null) {
+			usernameParam = "defaut";
+		}
 		
 		try {
 			conn = Singleton.DS.getConnection();
@@ -62,7 +66,7 @@ public class PanierServlet extends HttpServlet {
 		am = new ArticleManager(conn);
 		pm = new PanierManager(conn);
 		
-		if(usernameParam != null && idArticleParam != null) {
+		if(idArticleParam != null) {
 			if(pm.delete(usernameParam, Integer.parseInt(idArticleParam)) == 1) {
 				try { conn.commit(); } catch (Exception e) {e.printStackTrace();}
 			}

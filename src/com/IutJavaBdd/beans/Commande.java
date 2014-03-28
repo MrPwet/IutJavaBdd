@@ -1,14 +1,13 @@
 package com.IutJavaBdd.beans;
 
 import java.math.BigDecimal;
-
-import org.joda.time.DateTime;
+import java.sql.Date;
 
 public class Commande {
 	int idCommande;
 	String username;
 	BigDecimal prixTotal;
-	DateTime dateCommande;
+	Date dateCommande;
 	
 	public int getIdCommande() {
 		return idCommande;
@@ -28,10 +27,10 @@ public class Commande {
 	public void setPrixTotal(BigDecimal prixTotal) {
 		this.prixTotal = prixTotal;
 	}
-	public DateTime getDate() {
+	public Date getDateCommande() {
 		return dateCommande;
 	}
-	public void setDate(DateTime date) {
+	public void setDateCommande(Date date) {
 		this.dateCommande = date;
 	}
 
